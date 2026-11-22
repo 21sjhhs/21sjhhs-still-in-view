@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="带曝光补偿拨轮和实时胶片模拟的 Android 街头快拍相机。">
+  <meta name="theme-color" content="#efeee9">
+  <title>FilmCam | Still in View</title>
+  <link rel="icon" href="../../assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/site.css?v=12d6e5f6e404">
+  <link rel="stylesheet" href="../../assets/filmcam/workbench.css?v=01fb9cb57773">
+  <script type="module" src="../../assets/filmcam/workbench.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳至正文</a>
+  <header class="site-header">
+    <div class="header-inner frame">
+      <a class="brand" href="../../" aria-label="Still in View 首页"><span class="mark" aria-hidden="true"></span><span>STILL<br>IN VIEW.</span></a>
+      <nav aria-label="板块导航">
+        <a href="../../photography/"><strong>摄影集</strong><span lang="en">Photography</span></a>
+        <a href="../../projects/" aria-current="true"><strong>产品</strong><span lang="en">Projects</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+
+    <section class="frame product-page">
+      <a class="breadcrumb mono" href="../">产品 / 全部产品</a>
+      <div class="project-feature product-hero">
+        <div class="project-copy">
+          <span class="mono project-kicker">ANDROID APP / 0.5.0</span>
+          <img class="app-icon" src="../../assets/filmcam/icon.png" width="60" height="60" alt="">
+          <h1 lang="en">FilmCam<i>.</i></h1>
+          <p class="film-tagline">面向街头摄影的快拍相机。</p>
+          <div class="film-pillars">
+            <div><strong>曝光补偿拨轮</strong><span>转动快门外圈，即刻压暗或提亮。</span></div>
+            <div><strong>实时胶片模拟</strong><span>拍摄前就看见胶片色彩，也能导入 LUT 或自制配方。</span></div>
+          </div>
+          <div class="hero-product-links"><a class="download" href="../../assets/filmcam/FilmCam-0.5.0.apk" download>下载 Android APK <span class="link-mark" aria-hidden="true"></span></a>
+          <a class="product-link-demo" href="#filmcam-demo">试玩交互演示</a></div>
+          <div class="mono release-note">Android 10 及以上 · 23.6 MB</div>
+        </div>
+        <figure class="film-street">
+          <img src="../../assets/photos/places-we-inhabit/08-wechatimg2089-1920.webp" srcset="../../assets/photos/places-we-inhabit/08-wechatimg2089-720.webp 720w, ../../assets/photos/places-we-inhabit/08-wechatimg2089-1920.webp 1670w" sizes="(max-width: 680px) 90vw, 51vw" width="1670" height="1052" loading="eager" fetchpriority="high" decoding="async" alt="一辆白车驶过被树荫覆盖的道路">
+          <figcaption class="mono">选自《栖身之所》</figcaption>
+        </figure>
+      </div>
+      <section class="film-workbench" id="filmcam-demo" aria-labelledby="workbench-title" data-film-demo>
+  <div class="section-head">
+    <div><p class="mono section-label">FilmCam 网页模拟</p><h2 id="workbench-title" lang="en">In the viewfinder<i>.</i></h2></div>
+  </div>
+  <div class="workbench-layout">
+    <div class="workbench-tabs" role="group" aria-label="FilmCam 操作模式">
+      <button type="button" data-mode="camera" aria-pressed="true" aria-controls="filmcam-simulator"><strong>拍摄</strong><span>拨轮与胶片</span></button>
+      <button type="button" data-mode="design" aria-pressed="false" aria-controls="filmcam-simulator"><strong>胶片设计</strong><span>自制配方</span></button>
+      <button type="button" data-mode="edit" aria-pressed="false" aria-controls="filmcam-simulator"><strong>照片编辑</strong><span>手势调色</span></button>
+    </div>
+
+    <div class="workbench-guide">
+      <div class="guide-mode" data-guide="camera">
+        <h3>街头快拍</h3>
+        <dl>
+          <div><dt>曝光补偿拨轮</dt><dd>转动快门外圈，直接在取景时压暗或提亮。</dd></div>
+          <div><dt>实时胶片模拟</dt><dd>滑动胶片条换色，取景和成片使用同一套胶片。</dd></div>
+        </dl>
+      </div>
+      <div class="guide-mode" data-guide="design" hidden><h3>设计自己的胶片</h3><p>保存配方，再回到取景使用。</p></div>
+      <div class="guide-mode" data-guide="edit" hidden><h3>调出想要的成片</h3><p>点「对比」查看基底画面，调好后可另存照片。</p></div>
+      <div class="workbench-library" id="filmcam-photos">
+        <div class="library-head"><h4>从摄影集选一张</h4><span class="mono" data-photo-series>栖身之所</span></div>
+        <div class="demo-photos" role="group" aria-label="用于演示的摄影作品"><button type="button" class="demo-photo" data-photo="../../assets/photos/places-we-inhabit/08-wechatimg2089-1920.webp" data-alt="树荫下驶过的白车" data-series="栖身之所" aria-pressed="true" aria-label="使用《栖身之所》作品，树荫下驶过的白车"><img src="../../assets/photos/places-we-inhabit/08-wechatimg2089-720.webp" alt="" decoding="async" loading="lazy"></button>
+<button type="button" class="demo-photo" data-photo="../../assets/photos/portraits/08-wechatimg1935-1920.webp" data-alt="举着红气球的人像" data-series="人像写真" aria-pressed="false" aria-label="使用《人像写真》作品，举着红气球的人像"><img src="../../assets/photos/portraits/08-wechatimg1935-720.webp" alt="" decoding="async" loading="lazy"></button>
+<button type="button" class="demo-photo" data-photo="../../assets/photos/ordinary-places/05-wechatimg1898-1920.webp" data-alt="鱼缸里的两尾鱼" data-series="寻常之地" aria-pressed="false" aria-label="使用《寻常之地》作品，鱼缸里的两尾鱼"><img src="../../assets/photos/ordinary-places/05-wechatimg1898-720.webp" alt="" decoding="async" loading="lazy"></button>
+<button type="button" class="demo-photo" data-photo="../../assets/photos/portraits/07-wechatimg1934-1920.webp" data-alt="蓝色水面旁的人像" data-series="人像写真" aria-pressed="false" aria-label="使用《人像写真》作品，蓝色水面旁的人像"><img src="../../assets/photos/portraits/07-wechatimg1934-720.webp" alt="" decoding="async" loading="lazy"></button>
+<button type="button" class="demo-photo" data-photo="../../assets/photos/places-we-inhabit/03-wechatimg1945-1920.webp" data-alt="几个人坐在草地尽头，面朝水岸" data-series="栖身之所" aria-pressed="false" aria-label="使用《栖身之所》作品，几个人坐在草地尽头，面朝水岸"><img src="../../assets/photos/places-we-inhabit/03-wechatimg1945-720.webp" alt="" decoding="async" loading="lazy"></button>
+<button type="button" class="demo-photo" data-photo="../../assets/photos/ordinary-places/28-wechatimg2099-1920.webp" data-alt="阳光落在斜切的玻璃立面" data-series="寻常之地" aria-pressed="false" aria-label="使用《寻常之地》作品，阳光落在斜切的玻璃立面"><img src="../../assets/photos/ordinary-places/28-wechatimg2099-720.webp" alt="" decoding="async" loading="lazy"></button></div>
+        <p class="demo-status" role="status"></p>
+      </div>
+      <noscript><p>启用 JavaScript 后可操作模拟器。</p></noscript>
+    </div>
+    <figure class="device-demo">
+      <div class="film-interface" id="filmcam-simulator" data-active-screen="camera" data-hint="dial">
+        <div class="device-status" aria-hidden="true"><span>FilmCam</span><span class="device-battery"></span></div>
+        <div class="editor-header" data-editor hidden>
+          <button type="button" class="back-camera">返回</button>
+          <span data-screen-name>设计胶片</span>
+          <button type="button" class="demo-save">保存胶片</button>
+        </div>
+        <div class="instrument-preview">
+          <div class="instrument-source"><img src="../../assets/photos/places-we-inhabit/08-wechatimg2089-1920.webp" alt="树荫下驶过的白车，选自《栖身之所》"></div>
+          <canvas role="img" aria-label="应用当前设置后的摄影作品"></canvas>
+          <div class="camera-overlay" data-camera>
+            <span class="frame-ratio">4:3</span>
+            <div class="ev-readout"><output class="ev-value mono" id="demo-ev">0.0 EV</output><span class="mono">-3.0~+3.0 · 步长 1/3</span></div>
+            <button type="button" class="stage-settings" aria-label="设置" aria-haspopup="true" aria-expanded="false"><span></span><span></span><span></span></button>
+            <div class="settings-menu app-menu" hidden>
+              <button type="button" data-open-screen="design">从原片新建胶片</button>
+              <button type="button" data-open-screen="edit">编辑照片</button>
+              <button type="button" data-credits>胶片来源与许可</button>
+            </div>
+          </div>
+          <div class="editor-overlay" data-editor hidden>
+            <div class="editor-gestures"></div>
+            <button type="button" class="demo-compare" aria-pressed="false">对比</button>
+            <div class="gesture-picker" aria-hidden="true" hidden></div>
+            <div class="touch-guide touch-guide-editor" aria-hidden="true"><span class="touch-dot"></span><span class="touch-label"></span></div>
+          </div>
+          <div class="focus-box" aria-hidden="true" hidden></div>
+        </div>
+        <div class="capture-panel" data-camera>
+          <button type="button" class="recent-photo" aria-label="选取摄影作品"><img alt="" hidden></button>
+          <div class="shutter-cluster">
+            <div class="ev-dial" role="slider" tabindex="0" aria-label="曝光补偿拨轮" aria-valuemin="-3" aria-valuemax="3" aria-valuenow="0" aria-valuetext="0.0 EV">
+              <span class="dial-track" aria-hidden="true"></span><span class="dial-ticks" aria-hidden="true"></span><span class="dial-index" aria-hidden="true"></span>
+            </div>
+            <button class="demo-shutter" type="button" aria-label="拍照并保存演示作品"></button>
+            <div class="touch-guide touch-guide-dial" aria-hidden="true"><span class="touch-dot"></span><span class="touch-label">沿拨轮转动</span></div>
+          </div>
+          <output class="camera-ratio mono" aria-label="模拟焦段">1.0×</output>
+        </div>
+        <div class="instrument-control camera-controls" data-camera>
+          <div class="film-strip" role="group" aria-label="拍摄胶片">
+            <button type="button" data-look="original" style="--chips:#333a49,#98a0b0,#e4e8f1" aria-pressed="true">原片</button>
+            <button type="button" data-look="warm" style="--chips:#593d32,#c38552,#eac096" aria-pressed="false">暖昼 400</button>
+            <button type="button" data-look="mist" style="--chips:#284746,#648c83,#d4d5ac" aria-pressed="false">青岚 200</button>
+            <button type="button" data-look="portra_160_nc" style="--chips:#594548,#c88c75,#e3cbb8" aria-pressed="false">Portra 160 NC</button>
+            <button type="button" data-look="provia_400f" style="--chips:#263b50,#577994,#c6d9d3" aria-pressed="false">Provia 400F</button>
+            <button type="button" data-look="kodachrome_25" style="--chips:#532f35,#b95341,#dfa765" aria-pressed="false">Kodachrome 25</button>
+            <button type="button" data-look="acros_100" style="--chips:#363636,#878787,#e0e0e0" aria-pressed="false">Acros 100</button>
+            <button type="button" data-look="custom" aria-pressed="false" hidden>我的胶片</button>
+            <button type="button" data-look="imported" aria-pressed="false" hidden>导入胶片</button>
+          </div>
+          <button type="button" class="open-lut">+ 导入</button>
+        </div>
+        <div class="instrument-control editor-controls" data-editor hidden>
+          <div class="color-swatches" role="group" aria-label="选择色域" hidden>
+            <button type="button" data-color="0" style="--swatch: #de5e51" aria-label="红色" aria-pressed="false">红</button>
+            <button type="button" data-color="30" style="--swatch: #de944f" aria-label="橙色" aria-pressed="false">橙</button>
+            <button type="button" data-color="60" style="--swatch: #e8d370" aria-label="黄色" aria-pressed="false">黄</button>
+            <button type="button" data-color="120" style="--swatch: #79a861" aria-label="绿色" aria-pressed="false">绿</button>
+            <button type="button" data-color="180" style="--swatch: #69c4b9" aria-label="青色" aria-pressed="false">青</button>
+            <button type="button" data-color="240" style="--swatch: #759bdc" aria-label="蓝色" aria-pressed="false">蓝</button>
+            <button type="button" data-color="300" style="--swatch: #b58ad9" aria-label="紫色" aria-pressed="false">紫</button>
+          </div>
+          <div class="editor-modes" role="group" aria-label="调整范围">
+            <button type="button" data-adjustment-mode="global" aria-pressed="true">基础</button>
+            <button type="button" data-adjustment-mode="local" aria-pressed="false">色彩</button>
+          </div>
+          <div class="editor-row">
+            <select class="parameter-select" aria-label="选择调整参数"></select>
+            <output for="demo-adjustment" class="adjustment-value mono">0</output>
+            <button type="button" class="reset-adjustment">复位</button>
+          </div>
+          <div class="value-limits"><span></span><span></span></div>
+          <input id="demo-adjustment" type="range" min="-100" max="100" step="1" value="0" aria-label="参数值">
+          <div class="editor-action">
+            <button type="button" class="undo-adjustment" disabled>撤销</button>
+            <button type="button" class="redo-adjustment" disabled>重做</button>
+            <button type="button" class="save-edit" hidden>另存照片</button>
+            <button type="button" class="editor-more" aria-haspopup="true" aria-expanded="false">更多</button>
+            <div class="editor-menu app-menu" hidden>
+              <button type="button" class="change-photo">换照片</button>
+              <button type="button" class="editor-replay">手势教程</button>
+              <button type="button" class="reset-all">全部复位</button>
+            </div>
+          </div>
+        </div>
+        <div class="device-navigation" aria-hidden="true"></div>
+      </div>
+      <figcaption class="device-caption"><span class="mono">FILMCAM · 放映室</span><button class="replay-guide" type="button">重播手势</button></figcaption>
+    </figure>
+  </div>
+  <dialog class="credits-dialog" aria-labelledby="credits-title">
+    <form method="dialog"><button type="submit" aria-label="关闭胶片来源窗口">×</button></form>
+    <h3 id="credits-title">胶片来源与许可</h3>
+    <p>Portra 160 NC、Provia 400F、Kodachrome 25 与 Acros 100 源自 <a href="https://github.com/NatronGitHub/clut/tree/af7b50d4caf6244fb6895a647f5b6a84efe7931a">Pat David 的胶片预设</a>，本网页使用 FilmCam 的 17³ 重采样版本，沿用 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 许可。</p>
+  </dialog>
+  <dialog class="lut-dialog" aria-labelledby="lut-title">
+    <form method="dialog"><button type="submit" aria-label="关闭导入窗口">×</button></form>
+    <h3 id="lut-title">导入 LUT</h3>
+    <p>选择一个 SDR sRGB 3D <code>.cube</code> 文件，或先试用示例。文件在当前浏览器读取。</p>
+    <div class="lut-actions">
+      <button type="button" class="sample-lut">试用示例 LUT</button>
+      <label class="file-label">选择本地 .cube<input class="lut-file" type="file" accept=".cube" aria-label="选择本地 .cube 文件"></label>
+    </div>
+    <p class="lut-error" role="status"></p>
+  </dialog>
+</section>
+
+<section class="film-operations" aria-labelledby="operation-title">
+  <div class="operations-copy">
+    <p class="mono section-label">Android 界面</p>
+    <h2 id="operation-title">在 App 里怎么用</h2>
+    <dl>
+      <div><dt>拍摄</dt><dd>取景时拖动快门外圈的曝光拨轮。底部胶片条支持滑动和点选，取景与成片使用同一胶片。</dd></div>
+      <div><dt>导入与设计</dt><dd>底部「导入」可读取 3D LUT。也可以从设置编辑当前胶片或从原片新建，调好后保存到胶片条，或导出 33³ LUT。</dd></div>
+      <div><dt>照片编辑</dt><dd>从设置打开系统相册，再在预览上纵滑选参数、横滑改数值。「对比」可查看基底画面，编辑完成后可另存成片。</dd></div>
+    </dl>
+  </div>
+</section>
+
+    </section>
+  </main>
+  <footer class="site-footer frame"><a href="../../" lang="en">STILL IN VIEW.</a><span>摄影与独立创作</span><a href="#main">回到顶部</a></footer>
+</body>
+</html>
