@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>逐行解释</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">逐</div>
+          <div>
+            <h1>逐行解释</h1>
+            <p id="fileSummary">未选择文件</p>
+          </div>
+        </div>
+
+        <div class="toolbar" aria-label="工具栏">
+          <label class="file-button">
+            <input id="fileInput" type="file" />
+            选择文件
+          </label>
+
+          <div class="segmented" role="group" aria-label="处理模式">
+            <button class="segment active" type="button" data-mode="explain">解释</button>
+            <button class="segment" type="button" data-mode="translate">翻译</button>
+          </div>
+
+          <label class="field compact">
+            <span>目标</span>
+            <input id="targetLanguage" type="text" value="简体中文" autocomplete="off" />
+          </label>
+
+          <label class="field model-field">
+            <span>模型</span>
+            <select id="modelSelect">
+              <option value="deepseek-v4-flash" selected>deepseek-v4-flash</option>
+              <option value="deepseek-v4-pro">deepseek-v4-pro</option>
+              <option value="deepseek-chat">deepseek-chat</option>
+              <option value="deepseek-reasoner">deepseek-reasoner</option>
+            </select>
+          </label>
+
+          <label class="field concurrency-field">
+            <span>并发</span>
+            <input id="concurrencyInput" type="number" value="4" min="1" max="10" step="1" autocomplete="off" />
+          </label>
+
+          <label class="field key-field">
+            <span>API key</span>
+            <input id="apiKey" type="password" placeholder="示例可留空" autocomplete="off" />
+          </label>
+
+          <button id="sampleButton" type="button">载入示例</button>
+          <button id="runButton" class="primary" type="button" disabled>开始</button>
+          <button id="stopButton" type="button" disabled>停止</button>
+          <button id="promptToggle" type="button" aria-expanded="false">提示词</button>
+          <button id="exportPdfButton" type="button" disabled>PDF</button>
+          <button id="exportMarkdownButton" type="button" disabled>MD</button>
+        </div>
+      </header>
+
+      <p class="portfolio-demo-note" id="portfolioDemoNote">
+        示例可离线操作。真实处理需使用本地 Node 预览并填写 API key，文本会发送给 DeepSeek。
+      </p>
+
+      <section id="promptPanel" class="prompt-panel" hidden>
+        <div class="prompt-actions">
+          <button id="generateContextButton" type="button" disabled>生成总提示词</button>
+          <button id="resetPromptsButton" type="button">恢复默认</button>
+        </div>
+
+        <label class="prompt-box context-box">
+          <span>文件总提示词</span>
+          <textarea id="fileContextPrompt" spellcheck="false"></textarea>
+        </label>
+
+        <label class="prompt-box">
+          <span>解释提示词</span>
+          <textarea id="explainPrompt" spellcheck="false"></textarea>
+        </label>
+
+        <label class="prompt-box">
+          <span>翻译提示词</span>
+          <textarea id="translatePrompt" spellcheck="false"></textarea>
+        </label>
+      </section>
+
+      <section id="dropZone" class="workbench" aria-label="逐行对照区">
+        <div class="grid-header" role="presentation">
+          <div class="gutter">重点</div>
+          <div class="gutter">行</div>
+          <div class="pane-title">原始文本</div>
+          <div class="gutter">行</div>
+          <div class="pane-title">DeepSeek 输出</div>
+        </div>
+        <div id="rows" class="rows is-empty" aria-live="polite">
+          <div class="empty-state">
+            <strong>选择一个纯文本结构化文件</strong>
+            <span>.py .txt .r .fasta .csv .json .yaml .md 等</span>
+          </div>
+        </div>
+      </section>
+
+      <footer class="statusbar">
+        <div id="statusText">就绪</div>
+        <div id="progressText"></div>
+      </footer>
+    </main>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>

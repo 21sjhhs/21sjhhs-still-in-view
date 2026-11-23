@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WaterWidget</title>
+<link rel="stylesheet" href="./widget.css">
+<script type="module" src="./widget.js"></script>
+</head>
+<body>
+<div class="mac-desktop">
+  <header class="menu-bar"><button type="button" id="reopen" title="显示喝水小组件"><i class="drop-icon" aria-hidden="true"></i> WaterWidget</button><time id="desktop-clock"></time></header>
+  <main class="desktop-space">
+    <div class="widget-column">
+      <div class="demo-controls"><button type="button" id="replay-wheel">重播滚轮提示</button><a href="#cup-settings">自定义水杯</a></div>
+      <section class="widget" id="widget" aria-label="喝水小组件">
+        <header class="widget-head">
+          <i class="widget-icon" aria-hidden="true"><i class="drop-icon"></i></i><time data-today></time>
+          <div class="segmented compact" role="group" aria-label="界面">
+            <button type="button" data-panel="manual" aria-pressed="false">当前</button>
+            <button type="button" data-panel="cup" aria-pressed="true">水杯</button>
+          </div>
+          <button type="button" class="round window-control" data-hide title="隐藏" aria-label="隐藏">−</button>
+          <button type="button" class="round window-control" data-hide title="关闭" aria-label="关闭">×</button>
+        </header>
+        <div id="manual-panel" class="pane" hidden>
+          <section class="gauge">
+            <div class="tank" aria-hidden="true"><b id="tank-fill"></b><i class="drop-icon"></i></div>
+            <div class="gauge-copy"><strong id="total">0 ml</strong><span id="goal-label">目标 2000 ml</span>
+              <progress id="progress" aria-label="每日饮水目标进度" value="0" max="2000"></progress>
+              <span id="remaining">还差 2000 ml</span>
+            </div>
+          </section>
+          <div class="quick-row" aria-label="快捷饮水量">
+            <button type="button" class="flat" style="--tint:#526bad" data-quick="50">＋50</button>
+            <button type="button" class="flat" style="--tint:#2b7bd1" data-quick="100">＋100</button>
+            <button type="button" class="flat" style="--tint:#018cad" data-quick="250">＋250</button>
+            <button type="button" class="flat" style="--tint:#47945c" data-quick="350">＋350</button>
+            <button type="button" class="flat" style="--tint:#b97330" data-quick="500">＋500</button>
+          </div>
+          <div class="amount-row">
+            <button type="button" class="adjust" data-adjust="-50" aria-label="减少 50 ml">−50</button>
+            <button type="button" class="value-chip" id="amount-wheel" aria-pressed="false" title="点击后用滚轮调整"><b id="quick-amount">250</b> <small>ml</small></button>
+            <button type="button" class="adjust" data-adjust="50" aria-label="增加 50 ml">＋50</button>
+            <button type="button" class="flat grow" id="log-amount" aria-label="记录自定义水量">✓</button>
+            <button type="button" class="flat undo" id="undo" aria-label="撤销最近一次">↶</button>
+          </div>
+          <section class="widget-goal">
+            <div class="goal-row"><label for="goal">◎ 目标</label><div><input type="number" id="goal" min="500" max="6000" step="100" value="2000" aria-label="每日饮水目标"> ml</div></div>
+            <div class="segmented" role="group" aria-label="显示层级">
+              <button type="button" data-level="desktop" aria-pressed="true">桌面</button>
+              <button type="button" data-level="floating" aria-pressed="false">置顶</button>
+            </div>
+          </section>
+          <section class="history-mini">
+            <div><button type="button" class="plain" data-history>↗　☷ 记录 <span id="record-count">0</span></button><button type="button" class="plain danger" data-clear aria-label="清空今日记录">清空</button></div>
+            <p><span id="last-entry">还没有记录</span><small id="small-count">0 条</small></p>
+          </section>
+        </div>
+        <div id="cup-panel" class="pane">
+          <div class="segmented" role="group" aria-label="记录模式">
+            <button type="button" data-mode="drop" aria-pressed="true">液面下降</button>
+            <button type="button" data-mode="direct" aria-pressed="false">直接水量</button>
+          </div>
+          <button type="button" id="calibrate" class="calibrate" aria-pressed="false"><span class="switch" aria-hidden="true"></span><b>设定液面：关</b><small>可喝水</small></button>
+          <div class="cup-head"><button type="button" class="outline grow" data-history>☷ 记录</button><button type="button" class="outline settings-button" id="open-settings" aria-label="设计水杯" title="设计水杯">☷</button></div>
+          <div class="cup-interaction" data-wheel-hint="select">
+            <button type="button" id="cup-wheel" class="cup-preview" aria-pressed="false" aria-label="调整杯中水量" aria-describedby="wheel-instruction">
+              <span class="cup-label"><span aria-hidden="true">↕</span><strong id="cup-amount">350 ml</strong></span>
+              <canvas id="cup-graphic" width="440" height="300"></canvas>
+            </button>
+            <span class="gesture-dot wheel-dot" aria-hidden="true"></span>
+            <p id="wheel-instruction" class="gesture-label" role="status">点击水杯，再滚动鼠标滚轮</p>
+          </div>
+          <div class="metrics">
+            <div><small id="basis-label">基准</small><b id="basis">350</b> <small>ml</small></div>
+            <div><small>杯中</small><b id="in-cup">350</b> <small>ml</small></div>
+            <div><small>本次</small><b id="pending">0</b> <small>ml</small></div>
+          </div>
+          <p id="calculation" class="calc-note"></p>
+          <div class="cup-actions"><button type="button" class="flat blue" data-refill>↻ 满杯</button><button type="button" class="flat" id="log-cup">✓ 记录</button></div>
+        </div>
+      </section>
+    </div>
+    <section id="cup-settings" class="cup-settings" aria-labelledby="settings-title">
+      <header class="dialog-header"><i class="widget-icon" aria-hidden="true">◡</i><div><h1 id="settings-title" tabindex="-1">水杯设定</h1><p>先选一种杯型，再拖动滑杆改轮廓。</p></div><small id="settings-capacity">350 ml</small></header>
+      <div class="settings-body">
+        <div class="settings-preview"><canvas id="settings-graphic" width="520" height="680"></canvas><button type="button" class="flat blue" data-refill>↻ 设为满杯</button></div>
+        <div class="settings-controls">
+          <label class="capacity-label">容量 <span><input type="number" id="capacity" min="50" max="5000" step="10" value="350"> ml</span></label>
+          <div class="preset-group"><b>杯型预设</b><div>
+            <button type="button" class="outline" data-preset="straight">直壁杯</button>
+            <button type="button" class="outline" data-preset="wide">宽口杯</button>
+            <button type="button" class="outline" data-preset="bowl">矮圆杯</button>
+          </div></div>
+          <div id="shape-controls" data-shape-hint="show"></div>
+        </div>
+      </div>
+      <section class="cup-integral" aria-labelledby="integral-title">
+        <h2 id="integral-title">水量怎样算出来</h2>
+        <p>把杯子视为绕中心轴旋转的立体。每一层的截面积是 πr(t)²，把有水的各层积分，再除以满杯的积分，就得到体积比例。</p>
+        <div class="volume-formula" role="math" aria-label="杯中水量等于满杯容量乘以从一减水位到一的半径平方积分除以从零到一的半径平方积分">
+          <span><i>V</i>(<i>h</i>) = <i>C</i> ×</span>
+          <span class="integral-fraction"><span>∫<sub>1−h</sub><sup>1</sup> π<i>r</i>(<i>t</i>)² d<i>t</i></span><span>∫<sub>0</sub><sup>1</sup> π<i>r</i>(<i>t</i>)² d<i>t</i></span></span>
+        </div>
+        <p class="integral-variables"><i>C</i> 是满杯容量，<i>h</i> 是从杯底量起的水位比例。<i>t</i> 从杯口 0 到杯底 1，<i>r(t)</i> 由当前杯型决定。程序用 180 段梯形积分近似计算。</p>
+        <div class="integral-result"><span>当前水位 <b id="integral-height">100%</b></span><output id="integral-volume">350 ml × 100% ≈ 350 ml</output></div>
+        <p id="integral-mode"></p>
+      </section>
+    </section>
+  </main>
+</div>
+
+<dialog id="history-dialog">
+  <header class="dialog-header"><i class="widget-icon" aria-hidden="true">☷</i><div><h1>饮水记录</h1><time data-today></time></div><form method="dialog"><button class="round" aria-label="关闭饮水记录">×</button></form></header>
+  <div class="history-stats metrics"><div><small>今日总量</small><b id="history-total">0</b> <small>ml</small></div><div><small>目标</small><b id="history-goal">2000</b> <small>ml</small></div><div><small>记录数</small><b id="history-count">0</b> <small>条</small></div><button type="button" class="outline danger" data-clear>清空</button></div>
+  <div id="history-entries"></div>
+</dialog>
+</body>
+</html>
