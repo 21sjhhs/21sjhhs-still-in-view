@@ -1,0 +1,87 @@
+/* Editorial pages and the inline product previews. */
+.masthead-note { grid-column: 10 / -1; justify-self: end; min-width: 0; }
+.masthead-note .mono { display: block; margin-bottom: 8px; color: var(--muted); }
+.masthead-note p { font-size: clamp(17px, 1.75vw, 28px); font-weight: 560; letter-spacing: -.045em; line-height: 1.27; }
+.masthead h1 { grid-column: 1 / 10; }
+.hero-caption .series-line { margin-block: 9px 0; text-wrap: pretty; }
+.series-line { font-size: clamp(16px, 1.4vw, 22px); line-height: 1.55; }
+.series-card .series-line { margin-top: 12px; }
+.series-card:nth-child(even) .series-caption { border-top: 1px solid var(--line); }
+.projects-note { max-width: 26ch; }
+.projects-note p { font-size: clamp(17px, 2.3vw, 34px); font-weight: 600; line-height: 1.25; letter-spacing: -.05em; }
+.projects-note .mono { display: block; margin-top: 9px; color: var(--muted); }
+
+.collection-head > div:first-child { grid-column: 1 / 8; }
+.collection-note { grid-column: 8 / -1; max-width: 39ch; }
+@media (min-width: 801px) {
+  .gallery-opening { justify-items: start; width: 74%; margin-left: auto; margin-right: 4%; }
+  .gallery-opening .gallery-frame { width: min(100%, var(--print-width)); }
+  [data-series="ordinary-places"] .gallery-opening { margin-inline: 0 auto; }
+  [data-series="landscapes-and-travel"] .gallery-opening { justify-items: end; margin-right: 13%; }
+  [data-series="portraits"] .gallery-opening { justify-items: center; margin-inline: auto; }
+  [data-series="street-documentary"] .gallery-opening { width: 85%; margin-right: 0; }
+  .gallery-row.gallery-wide { width: 100%; }
+  .gallery-pair.gallery-center { width: 82%; }
+  .gallery-row:is(.gallery-left, .gallery-right) { width: 76%; justify-items: start; margin-inline: 0 auto; }
+  .gallery-row.gallery-right { margin-inline: auto 0; justify-items: end; }
+  .gallery-left .gallery-frame, .gallery-right .gallery-frame { justify-self: stretch; }
+}
+
+
+/* Treat the instruments as objects on the page, with captions beside them. */
+.project-list { grid-template-columns: repeat(12,minmax(0,1fr)); row-gap: clamp(94px, 15vw, 220px); }
+.project-entry { display: grid; grid-column: 1 / -1; grid-template-columns: repeat(12,minmax(0,1fr)); gap: var(--gutter); align-items: center; }
+.project-entry .project-copy { grid-column: 1 / 5; grid-row: 1; padding: 0; }
+.project-entry .project-copy h3 { font-size: clamp(31px, 5.25vw, 82px); overflow-wrap: anywhere; }
+.project-entry h3 a:hover, .project-entry .project-link:hover { color: var(--accent); }
+.project-preview { grid-row: 1; grid-column: 5 / -1; width: 100%; min-width: 0; height: 490px; display: block; border: 0; }
+.project-theme-filmcam .project-preview { grid-column: 6 / 12; justify-self: center; width: min(100%, 410px); height: 670px; }
+.project-theme-filmcam .project-copy h3 { font-size: clamp(46px, 6.45vw, 96px); overflow-wrap: normal; }
+.project-theme-noemorph .project-preview { grid-column: 1 / 10; height: clamp(390px, 58vw, 730px); }
+.project-theme-noemorph .project-copy { grid-column: 10 / -1; }
+.project-theme-noemorph .project-copy h3 { font-size: clamp(30px, 4vw, 66px); }
+.project-theme-waterwidget .project-preview { grid-column: 6 / 11; justify-self: center; width: min(100%, 388px); height: 560px; }
+.project-theme-code-reading-with-deepseek .project-preview { grid-column: 1 / 10; }
+.project-theme-code-reading-with-deepseek .project-copy { grid-column: 10 / -1; }
+@media (max-width: 1050px) {
+  .masthead h1 { font-size: clamp(62px, 11.4vw, 132px); }
+}
+@media (max-width: 900px) {
+  .masthead { row-gap: 26px; }
+  .masthead-note { grid-column: 1; justify-self: start; }
+  .masthead-note br { display: none; }
+  .masthead h1 { grid-column: 1; }
+}
+@media (max-width: 780px) {
+  .hero-caption .series-line { flex: 1 1 100%; margin: 0; }
+}
+@media (max-width: 600px) {
+  .masthead { row-gap: 18px; }
+  .masthead h1 { font-size: clamp(43px, 13.85vw, 83px); }
+  .collection-head > div:first-child, .collection-note { grid-column: 1; }
+  #projects .section-head { display: grid; gap: 12px; }
+  .projects-note br { display: none; }
+  .project-entry .project-preview, .project-entry .project-copy { grid-column: 1 / -1; grid-row: auto; }
+  .project-entry .project-copy { grid-row: 1; }
+  .project-theme-noemorph .project-preview { height: 400px; }
+  .project-theme-code-reading-with-deepseek .project-preview { height: 420px; }
+}
+
+/* The lead print has its own margin. Its caption sits on the paper below it. */
+@media (min-width: 901px) {
+  .home-photography .hero-image { grid-column: 2 / 12; max-width: 1080px; justify-self: center; }
+  .home-photography .hero-caption { grid-row: 2; grid-column: 2 / 12; display: grid; grid-template-columns: minmax(0,.7fr) minmax(0,1fr) auto; align-items: baseline; gap: 4px 24px; }
+  .home-photography .hero-credit { grid-column: 1; grid-row: 2; }
+  .home-photography .hero-caption .series-count { grid-column: 3; grid-row: 1; }
+  .home-photography .hero-caption .series-line { grid-column: 2; grid-row: 1; margin: 0; justify-self: end; }
+  .home-photography .series-grid { row-gap: clamp(100px, 13vw, 200px); }
+}
+@media (max-width: 880px) {
+  .project-entry .project-preview, .project-entry .project-copy { grid-column: 1 / -1; grid-row: auto; }
+  .project-entry .project-copy { grid-row: 1; }
+}
+
+.gallery-main .collection-head { padding-block: clamp(31px, 6vw, 83px) 21px; }
+.gallery-main .collection-head h1 { font-size: clamp(44px, 8vw, 118px); }
+.gallery-main .collection-note { justify-self: end; }
+@media (max-width: 600px) { .gallery-main .collection-note { justify-self: start; } }

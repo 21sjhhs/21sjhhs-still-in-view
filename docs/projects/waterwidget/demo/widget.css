@@ -173,3 +173,11 @@ dialog::backdrop { background: #182b425c; }
   .gesture-dot { animation: none !important; }
   .widget { transition: none; }
 }
+
+/* Home preview removes the desktop wallpaper and presents the widget itself. */
+.portfolio-embed, .portfolio-embed .mac-desktop { background: #fff; }
+.portfolio-embed .mac-desktop { min-height: 0; }
+.portfolio-embed .desktop-space { display: block; padding: 10px 12px 22px; }
+.portfolio-embed :is(.menu-bar, .cup-settings, .demo-controls a, .window-control) { display: none; }
+.portfolio-embed .widget-column { margin-inline: auto; }
+.portfolio-embed.show-cup-settings .cup-settings { display: block; width: min(100%, 340px); margin: 22px auto 0; }

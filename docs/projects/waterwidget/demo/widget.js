@@ -348,7 +348,13 @@ find("#log-cup").addEventListener("click", () => {
   activeWheel = "";
   update();
 });
-find("#open-settings").addEventListener("click", () => {
+find("#open-settings").addEventListener("click", (event) => {
+  const page = document.documentElement;
+  if (page.classList.contains("portfolio-embed")) {
+    const expanded = page.classList.toggle("show-cup-settings");
+    event.currentTarget.setAttribute("aria-expanded", String(expanded));
+    if (!expanded) return;
+  }
   find("#settings-title").focus({ preventScroll: true });
   find("#cup-settings").scrollIntoView({ block: "nearest" });
 });

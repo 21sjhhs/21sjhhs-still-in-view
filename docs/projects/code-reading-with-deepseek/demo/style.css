@@ -575,3 +575,15 @@ h1 {
 }
 
 body { min-width: 0; }
+
+/* The embedded sample uses the real comparison rows without the app shell. */
+.portfolio-embed body { background: #fff; }
+.portfolio-embed .app-shell { display: block; height: 100dvh; min-height: 0; padding-block: 10px; }
+.portfolio-embed :is(.topbar, .portfolio-demo-note, .prompt-panel, .statusbar) { display: none; }
+.portfolio-embed .workbench { height: 100%; margin: 0; border: 0; border-radius: 0; box-shadow: none; }
+@media (max-width: 700px) {
+  .portfolio-embed :is(.grid-header, .line-row) { grid-template-columns: 28px 25px minmax(0,1fr) 25px minmax(0,1fr); width: 100%; }
+  .portfolio-embed .rows { width: 100%; min-height: 0; }
+  .portfolio-embed :is(.mark-cell, .line-no, .gutter, .pane-title) { padding-inline: 3px; }
+  .portfolio-embed :is(.source-cell, .result-cell) { padding-inline: 5px; white-space: pre-wrap; overflow-wrap: anywhere; }
+}

@@ -1,66 +1,42 @@
-.project-theme-noemorph { --project-ground: #202a39; --project-ink: #f1f6ef; --project-detail: #d6dde2; --project-accent: #9fe1ba; --project-rule: #677983; }
-.project-theme-waterwidget { --project-ground: #dcece8; --project-ink: #122d33; --project-detail: #28484f; --project-accent: #155762; --project-rule: #8ba8a6; }
-.project-theme-code-reading-with-deepseek { --project-ground: #342631; --project-ink: #fff2eb; --project-detail: #eadbdc; --project-accent: #ffbb97; --project-rule: #a47f8e; }
-.project-feature.project-brief { height: 100%; grid-template-columns: 1fr; grid-template-rows: auto 1fr; background: var(--project-ground, #1a211e); color: var(--project-ink, #f3f1e7); }
-.project-brief .project-art, .project-brief .project-poster { order: -1; }
-.project-list .project-brief .project-copy { display: flex; align-self: stretch; flex-direction: column; align-items: start; padding: clamp(22px, 2.5vw, 42px); }
-.project-list .project-brief .project-copy h3 { margin: 12px 0 13px -.04em; font-size: clamp(30px, 3.5vw, 54px); line-height: .99; overflow-wrap: anywhere; }
-.project-brief .project-copy p { color: var(--project-detail, #d9ded4); max-width: 30ch; margin-bottom: 24px; }
-.project-brief .project-kicker, .project-brief .project-link .link-mark { color: var(--project-accent, #d2e591); }
-.project-brief .project-link { margin-top: auto; border-color: var(--project-rule, #778671); }
-.project-brief:is(:hover, :focus-visible) .project-link { color: var(--project-accent, #d2e591); border-color: currentColor; }
-.project-art { position: relative; isolation: isolate; overflow: hidden; min-width: 0; aspect-ratio: 1.57; }
-.project-art { display: grid; place-items: center; padding: 6%; }
+.project-list { display: grid; gap: clamp(37px, 7vw, 104px) var(--gutter); }
+.project-art { grid-row: 1; }
+.project-art { display: grid; place-items: center; overflow: hidden; min-width: 0; aspect-ratio: 1.57; }
 .project-art img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
-.project-theme-noemorph .project-art { background: #afbcca; }
-.project-theme-noemorph .project-art img { box-shadow: 0 9px 19px #19283830; }
-.project-theme-waterwidget .project-art { background: #b7d6e5; }
-.project-theme-code-reading-with-deepseek .project-art { background: #ceaaa1; }
 
-.repository-hero { margin-top: 18px; display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); align-items: center; background: var(--project-ground); color: var(--project-ink); }
+.repository-hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--gutter); align-items: center; margin-top: clamp(18px, 4vw, 62px); }
 .repository-intro, .repository-art { min-width: 0; }
-.repository-intro { padding: clamp(27px, 4.7vw, 76px); padding-right: clamp(17px, 2.3vw, 41px); }
-.repository-intro .project-kicker { color: var(--project-accent); }
-.repository-intro h1 { margin: 18px 0 25px -.05em; font-size: clamp(43px, 6.15vw, 100px); line-height: .99; letter-spacing: -.065em; overflow-wrap: anywhere; }
-.repository-intro h1 i { color: var(--project-accent); }
-.repository-lead { font-size: clamp(19px, 2vw, 28px); line-height: 1.4; font-weight: 650; }
-.repository-description { margin-top: 15px; max-width: 35ch; font-size: 1rem; line-height: 1.75; color: var(--project-detail); }
-.repository-link { display: inline-flex; align-items: center; gap: 15px; margin-top: 26px; padding: 10px 0; border-bottom: 1px solid var(--project-rule); font-size: .95rem; }
-.repository-link .link-mark, .repository-link:hover { color: var(--project-accent); }
-.repository-link:hover { border-color: currentColor; }
-.repository-art { padding: clamp(19px, 3vw, 44px); }
-.repository-art .project-art { padding: 0; background: transparent; aspect-ratio: 1.5; }
-.repository-art .project-art img { box-shadow: none; }
-.repository-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 24px; margin-top: 27px; }
-.repository-actions .repository-link { margin-top: 0; }
-.repository-try { padding: 11px 16px; background: var(--project-accent); color: var(--project-ground); font-weight: 650; font-size: .95rem; }
-.repository-try:hover { text-decoration: underline; }
-.repository-demo { margin-top: clamp(46px, 8vw, 110px); scroll-margin-top: 13px; }
-.repository-demo-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; padding-block: 18px 20px; border-top: 1px solid var(--ink); }
-.repository-demo-head h2 { font-size: clamp(28px, 4vw, 59px); letter-spacing: -.057em; }
-.repository-demo-head p { max-width: 50ch; margin-top: 8px; color: var(--muted); line-height: 1.65; }
-.repository-demo-frame { display: block; width: 100%; height: clamp(670px, 76vw, 850px); border: 1px solid var(--line); background: var(--project-ground); }
+.repository-intro { padding-block: 13px; }
+.repository-intro h1 { margin: 12px 0 19px -.055em; font-size: clamp(36px, 5.9vw, 96px); line-height: .98; letter-spacing: -.045em; overflow-wrap: anywhere; }
+.repository-lead { font-size: clamp(18px, 1.8vw, 26px); line-height: 1.4; font-weight: 650; }
+.repository-description { margin-top: 15px; max-width: 35ch; font-size: 1rem; line-height: 1.75; color: var(--muted); }
+.repository-link, .repository-try { display: inline-flex; align-items: center; gap: 9px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: .95rem; }
+.repository-link:hover, .repository-try:hover { color: var(--accent); border-color: currentColor; }
+.repository-art .project-art { aspect-ratio: auto; }
+.repository-art img { height: auto; }
+.repository-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 9px 21px; margin-top: 19px; }
+.repository-try { color: var(--accent); border-color: currentColor; font-weight: 650; }
+.repository-demo { margin-top: clamp(52px, 10vw, 132px); }
+.repository-demo-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; padding-block: 18px 22px; border-top: 1px solid var(--ink); }
+.repository-demo-head h2, .repository-features h2 { font-size: clamp(28px, 4vw, 60px); letter-spacing: -.06em; }
+.repository-demo-head p { max-width: 52ch; margin-top: 8px; color: var(--muted); line-height: 1.65; }
+.repository-demo-frame { display: block; width: 100%; height: clamp(670px, 76vw, 850px); border: 1px solid var(--line); }
 .project-theme-waterwidget .repository-demo-frame { height: 646px; }
-.repository-features { display: grid; grid-template-columns: minmax(160px, 1fr) 2.2fr; gap: clamp(20px, 5vw, 80px); margin-top: clamp(45px, 8vw, 114px); padding-top: 24px; border-top: 1px solid var(--ink); }
-.repository-features h2 { font-size: clamp(28px, 4vw, 61px); letter-spacing: -.06em; }
+.repository-features { display: grid; grid-template-columns: minmax(160px, 1fr) 2.2fr; gap: clamp(20px, 5vw, 80px); margin-top: clamp(45px, 8vw, 114px); padding-top: 23px; border-top: 1px solid var(--ink); }
 .repository-features dl { margin: 0; }
 .repository-features dl div { display: grid; grid-template-columns: minmax(105px, .46fr) 1fr; gap: 13px; padding: 13px 0; border-bottom: 1px solid var(--line); }
 .repository-features dt { font-weight: 680; }
 .repository-features dd, .repository-usage { margin: 0; line-height: 1.7; color: var(--muted); }
 .repository-usage { margin-top: 17px; font-size: .9rem; }
-@media (min-width: 781px) {
-  .project-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 2.6vw, 44px); }
-  .project-list article:first-child { grid-column: 1 / -1; }
-  .project-list article + article .project-poster { aspect-ratio: 1.55; }
+
+@media (max-width: 900px) {
+  .repository-hero { grid-template-columns: minmax(0, 1fr); }
+  .repository-intro h1 { font-size: clamp(39px, 10vw, 82px); }
 }
-@media (max-width: 780px) {
-  .project-brief .project-art { max-height: 330px; }
-  .repository-hero { grid-template-columns: 1fr; }
-  .repository-art { padding-top: 0; }
-  .repository-intro h1 { font-size: clamp(35px, 9vw, 64px); }
-}
-@media (max-width: 560px) {
+@media (max-width: 600px) {
   .repository-demo-head { flex-direction: column; align-items: start; }
   .repository-features, .repository-features dl div { grid-template-columns: 1fr; }
   .repository-features dl div { gap: 4px; }
 }
+
+.project-theme-noemorph .repository-hero { grid-template-columns: minmax(0, 1fr); }
+.project-theme-noemorph .repository-demo-frame { border: 0; }

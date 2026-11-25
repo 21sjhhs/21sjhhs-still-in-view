@@ -84,6 +84,17 @@ SITE_CSS = versioned_asset("assets/site.css")
 WORKBENCH_CSS = versioned_asset("assets/filmcam/workbench.css")
 PROJECTS_CSS = versioned_asset("assets/projects/projects.css")
 GALLERY_JS = versioned_asset("assets/gallery.js")
+MOTION_CSS = versioned_asset("assets/editorial.css")
+MOTION_JS = versioned_asset("assets/editorial.js")
+HOME_CSS = versioned_asset("assets/home.css")
+
+GALLERY_RHYTHM = {
+    "street-documentary": ("wide", "right", "left", "wide"),
+    "places-we-inhabit": ("right", "left", "center", "right"),
+    "ordinary-places": ("left", "right", "center", "wide", "right", "left"),
+    "landscapes-and-travel": ("wide", "wide", "left", "right", "center"),
+    "portraits": ("center", "left", "right", "center", "wide"),
+}
 
 GALLERY_ROWS = {
     "street-documentary": (
@@ -178,33 +189,48 @@ def photograph(collection, photo, base="", *, sizes="100vw", eager=False, alt=No
             f'alt="{escape(description, quote=True)}">')
 
 
-def page(title, description, contents, base="", *, current="", gallery=False, workbench=False, project_catalog=False):
-    home = base or "./"
+def page(title, description, contents, base="", *, current="", gallery=False, workbench=False, project_catalog=False, editorial=False, homepage=False):
+    home = f"{base}index.html"
     photography = f"{base}#photography"
     projects = f"{base}#projects"
-    script = f'<script src="{base}{GALLERY_JS}" defer></script>' if gallery else ""
+    resources = []
+    if gallery:
+        resources.append(f'<script src="{base}{GALLERY_JS}" defer></script>')
     if workbench:
-        script = (f'<link rel="stylesheet" href="{base}{WORKBENCH_CSS}">\n  '
-                  f'<script type="module" src="{base}assets/filmcam/workbench.js"></script>')
+        resources.extend((
+            '<script>if (new URLSearchParams(location.search).has("portfolio")) document.documentElement.classList.add("portfolio-embed");</script>',
+
+            f'<link rel="stylesheet" href="{base}{WORKBENCH_CSS}">',
+            f'<script type="module" src="{base}assets/filmcam/workbench.js"></script>',
+        ))
     if project_catalog:
-        script = f'<link rel="stylesheet" href="{base}{PROJECTS_CSS}">'
+        resources.append(f'<link rel="stylesheet" href="{base}{PROJECTS_CSS}">')
+    if editorial or homepage:
+        stylesheet = HOME_CSS if homepage else MOTION_CSS
+        script_mode = 'defer' if homepage else 'type="module"'
+        resources.extend((
+            f'<link rel="stylesheet" href="{base}{stylesheet}">',
+            f'<script {script_mode} src="{base}{MOTION_JS}"></script>',
+        ))
+    body = ' class="home-page"' if homepage else ""
+    head = "\n  ".join(resources)
     return f"""<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="{escape(description, quote=True)}">
-  <meta name="theme-color" content="#efeee9">
+  <meta name="theme-color" content="#ffffff">
   <title>{escape(title)}</title>
   <link rel="icon" href="{base}assets/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="{base}{SITE_CSS}">
-  {script}
+  {head}
 </head>
-<body>
+<body{body}>
   <a class="skip" href="#main">跳至正文</a>
   <header class="site-header">
     <div class="header-inner frame">
-      <a class="brand" href="{home}" aria-label="Still in View 首页"><span class="mark" aria-hidden="true"></span><span>STILL<br>IN VIEW.</span></a>
+      <a class="brand" href="{home}" aria-label="Still in View 首页" lang="en">Still in View<span aria-hidden="true">.</span></a>
       <nav aria-label="板块导航">
         <a href="{photography}"{' aria-current="true"' if current == 'photography' else ''}><strong>摄影集</strong><span lang="en">Photography</span></a>
         <a href="{projects}"{' aria-current="true"' if current == 'projects' else ''}><strong>产品集</strong><span lang="en">Projects</span></a>
@@ -220,70 +246,57 @@ def page(title, description, contents, base="", *, current="", gallery=False, wo
 """
 
 
-def collection_cards(items):
-    cards = []
-    for item in items:
-        photo = item["cover"]
-        cover = photograph(item, photo, sizes="(max-width: 560px) 90vw, (max-width: 900px) 45vw, 56vw")
-        portrait = " series-portrait" if photo["width"] < photo["height"] else ""
-        subtitle = f'<div class="mono" lang="en">{escape(item["title"])}</div>' if item["title"] else ""
-        cards.append(f"""
-    <article class="series-card{portrait}">
-      <a href="photography/{item["slug"]}/">
-        <div class="series-image">{cover}</div>
-        <div class="series-caption"><div><h2>{escape(item["name"])}</h2>{subtitle}</div>
-          <span class="mono series-count">{len(item["photos"]):02} 张 <span class="link-mark" aria-hidden="true"></span></span>
-        </div>
-      </a>
-    </article>""")
-    return "".join(cards)
+def collection_card(item, *, feature=False):
+    photo = item["cover"]
+    portrait = photo["width"] < photo["height"]
+    sizes = "(max-width: 640px) 72vw, 32vw" if portrait else "(max-width: 640px) 90vw, 45vw"
+    cover = photograph(item, photo, sizes=sizes, eager=feature)
+    shape = " archive-card-portrait" if portrait else ""
+    return f"""
+        <article class="archive-card{shape}">
+          <a href="photography/{item["slug"]}/index.html">
+            <div class="archive-print">{cover}</div>
+            <h3>{escape(item["name"])}</h3>
+          </a>
+        </article>"""
 
 
-def camera_art(base=""):
-    scene = next((photo for photo in ORDINARY["photos"] if photo["source"] == "WechatIMG2099.jpg"),
-                 ORDINARY["cover"])
-    img = photograph(ORDINARY, scene, base, sizes="(max-width: 680px) 73vw, 48vw", alt="")
-    return f"""<div class="camera-art" aria-hidden="true">
-      <div class="viewfinder">{img}
-        <div class="v-grid"></div><span class="v-target"></span>
-        <div class="v-data mono"><span>FILMCAM</span><span>+0.3 EV</span></div>
-        <div class="v-control mono"><span>青岚 200</span><span class="v-shutter"></span><span>1.0×</span></div>
-      </div>
-      <span class="view-label mono">取景示意</span>
-    </div>"""
-
-
-def project_art(product, base="", *, detail=False):
-    if product["slug"] == "filmcam":
-        return camera_art(base)
+def project_art(product, base):
     path, width, height = product["preview"]
-    loading = "" if detail else ' loading="lazy"'
-    alt = f'{product["name"]} 项目演示的实际界面' if detail else ""
+    alt = f'{product["name"]} 项目演示的实际界面'
     return (f'<div class="project-art"><img src="{base}{path}" width="{width}" '
-            f'height="{height}" alt="{alt}" decoding="async"{loading}></div>')
+            f'height="{height}" alt="{alt}" decoding="async"></div>')
 
 
 def project_entries():
     entries = []
     for product in PROJECTS:
         slug = product["slug"]
-        cover = project_art(product)
-        layout = "project-feature" if slug == "filmcam" else "project-feature project-brief"
+        source, fit = {
+            "filmcam": ("index.html", ".device-demo"),
+            "waterwidget": ("demo/index.html", ".desktop-space"),
+            "noemorph": ("knowledge-map.html", ""),
+            "code-reading-with-deepseek": ("demo/index.html", ""),
+        }[slug]
+        directory = f"projects/{slug}/"
+        src = f"{directory}{source}?portfolio"
+        frame_source = f'src="{src}"' if slug == "noemorph" else f'data-preview-src="{src}" hidden'
+        measure = f' data-fit="{fit}"' if fit else ""
         label = product["platform"]
         if product.get("version"):
             label += f' / {product["version"]}'
         language = ' lang="en"' if product["name"].isascii() else ""
         entries.append(f"""
-      <article class="project-theme-{slug}">
-        <a class="{layout}" href="projects/{slug}/">
-          <div class="project-copy">
-            <span class="mono project-kicker">{label}</span>
-            <h3{language}>{product["name"]}</h3>
-            <p>{product["summary"]}</p>
-            <span class="project-link">查看产品 <span class="link-mark" aria-hidden="true"></span></span>
-          </div>
-          {cover}
-        </a>
+      <article class="project-entry project-theme-{slug}" data-reveal>
+        <div class="project-copy">
+          <span class="mono project-kicker">{label}</span>
+          <h3{language}><a href="{directory}index.html">{product["name"]}</a></h3>
+          <p>{product["summary"]}</p>
+          <a class="project-link" href="{directory}index.html">查看产品</a>
+        </div>
+        <div class="project-display">
+          <iframe class="project-preview" {frame_source} title="{product["name"]} 交互演示" loading="lazy"{measure}></iframe>
+        </div>
       </article>""")
     return "".join(entries)
 
@@ -294,7 +307,9 @@ def repository_project(product):
     slug = product["slug"]
     language = ' lang="en"' if name.isascii() else ""
     repo_url = f'https://github.com/21sjhhs/{product["repo"]}'
-    art = project_art(product, base, detail=True)
+    art = "" if slug == "noemorph" else f'<div class="repository-art">{project_art(product, base)}</div>'
+    demo_url = "./knowledge-map.html" if slug == "noemorph" else "./demo/"
+    demo_help = "拖动空白处移动图谱，双击节点展开分支。按住 Control 或 Command 滚动缩放。" if slug == "noemorph" else product["demo_help"]
     features = "".join(f"<div><dt>{title}</dt><dd>{description}</dd></div>"
                        for title, description in product["features"])
     return page(f"{name} | Still in View", product["summary"], f"""
@@ -311,14 +326,14 @@ def repository_project(product):
             <a class="repository-link" href="{repo_url}">GitHub 仓库 <span class="link-mark" aria-hidden="true"></span></a>
           </div>
         </div>
-        <div class="repository-art">{art}</div>
+        {art}
       </div>
       <section class="repository-demo" id="project-demo" aria-labelledby="project-demo-title">
         <div class="repository-demo-head">
-          <div><h2 id="project-demo-title">{product["demo_title"]}</h2><p>{product["demo_help"]}</p></div>
-          <a class="text-link" href="./demo/">独立打开 <span class="link-mark" aria-hidden="true"></span></a>
+          <div><h2 id="project-demo-title">{product["demo_title"]}</h2><p>{demo_help}</p></div>
+          <a class="text-link" href="{demo_url}">独立打开 <span class="link-mark" aria-hidden="true"></span></a>
         </div>
-        <iframe class="repository-demo-frame" src="./demo/" title="{name} · {product["demo_title"]}" loading="lazy" allowfullscreen></iframe>
+        <iframe class="repository-demo-frame" src="{demo_url}" title="{name} · {product["demo_title"]}" loading="lazy" allowfullscreen></iframe>
       </section>
       <section class="repository-features" aria-labelledby="repository-features-title">
         <h2 id="repository-features-title">使用方式</h2>
@@ -332,44 +347,28 @@ def repository_project(product):
 
 def home():
     feature, *other_albums = COLLECTIONS
-    hero = photograph(feature, feature["cover"], sizes="(max-width: 780px) 92vw, 54vw", eager=True)
-    photo_count = sum(len(item["photos"]) for item in COLLECTIONS)
-    other_cards = (f'<div class="series-grid frame">{collection_cards(other_albums)}</div>'
-                   if other_albums else "")
+    other_cards = "".join(collection_card(item) for item in other_albums)
     return page("Still in View | 摄影与独立创作", "摄影作品集与独立产品。", f"""
-    <section id="photography" class="home-photography" aria-labelledby="hero-title">
-      <div class="hero frame">
-        <div class="hero-copy">
-          <p class="hero-kicker mono"><span></span> 摄影集</p>
-          <h1 id="hero-title" lang="en"><span>Still in</span><span>View<i>.</i></span></h1>
-          <div class="hero-line"><span>{len(COLLECTIONS)} 个系列 · {photo_count} 张作品</span><div class="optical-mark" aria-hidden="true"></div></div>
-        </div>
-        <a class="hero-photo" href="photography/{feature["slug"]}/">
-          <div class="hero-image">{hero}</div>
-          <div class="hero-caption">
-            <div><h2>{escape(feature["name"])}</h2><span class="mono hero-credit" lang="en">{escape(feature["title"])}</span></div>
-            <span class="mono series-count">{len(feature["photos"])} 张 <span class="link-mark" aria-hidden="true"></span></span>
-          </div>
-        </a>
+    <section id="photography" class="archive frame" aria-labelledby="photography-title">
+      <h1 class="archive-wordmark" lang="en">Still in <span>View.</span></h1>
+      <div class="archive-feature">
+        <h2 id="photography-title">摄影集</h2>
+        {collection_card(feature, feature=True)}
       </div>
-      {other_cards}
+      <div class="archive-symbol focus-study" aria-hidden="true"></div>
+      <div class="archive-grid">{other_cards}
+      </div>
     </section>
 
-    <div class="projects-transition frame">
-      <a class="projects-jump" href="#projects">
-        <div><small class="mono" lang="en">SCROLL FOR PROJECTS</small><strong>往下看产品集</strong></div>
-        <span class="projects-jump-arrow" aria-hidden="true">↓</span>
-      </a>
-    </div>
-
-    <section id="projects" class="section frame" aria-labelledby="projects-title">
-      <div class="section-head">
-        <div><p class="mono section-label">产品集</p><h2 id="projects-title" lang="en">Built by hand<i>.</i></h2></div>
-        <span class="mono section-side">{len(PROJECTS)} 个项目</span>
+    <section id="projects" class="home-projects frame" aria-labelledby="projects-title">
+      <div class="project-index-head">
+        <h2 id="projects-title">产品集</h2>
+        <div class="archive-symbol assembly-study" aria-hidden="true"></div>
       </div>
+      <p class="file-preview-note" hidden><a class="text-link" href="http://127.0.0.1:8766/#projects">打开本地交互预览</a></p>
       <div class="project-list">{project_entries()}
       </div>
-    </section>""", project_catalog=True)
+    </section>""", homepage=True)
 
 
 def section_redirect(section_id, title):
@@ -407,9 +406,10 @@ def collection(item, next_item):
     slug = item["slug"]
     base = "../../"
     total = len(item["photos"])
+    rhythm = GALLERY_RHYTHM.get(slug, ("center",))
     rows = []
     pos = 0
-    for row in gallery_rows(item):
+    for index, row in enumerate(gallery_rows(item)):
         ratios = [photo["width"] / photo["height"] for photo in row]
         is_pair = len(row) == 2
         layout = "gallery-pair" if is_pair else "gallery-single"
@@ -438,18 +438,19 @@ def collection(item, next_item):
           <a class="photo-link" href="{target}"{link_data} aria-label="放大第 {pos} 张，共 {total} 张">{image}</a>
           <figcaption class="mono"><span>{pos:02} / {total:02}</span>{caption}<span class="link-mark" aria-hidden="true"></span></figcaption>
         </figure>""")
+        placement = rhythm[(index - 1) % len(rhythm)] if index else "opening"
+        reveal = " data-reveal" if index else ""
         rows.append(f"""
-      <div class="gallery-row {layout}" style="--pair-columns: {columns}">
+      <div class="gallery-row {layout} gallery-{placement}" style="--pair-columns: {columns}"{reveal}>
         {"".join(frames)}
       </div>""")
     title = f'<p lang="en" class="mono section-label">{escape(item["title"])}</p>' if item["title"] else ""
-    note = f'<p>{escape(item["description"])}</p>' if item["description"] else ""
     return page(f'{item["name"]} | Still in View', item["description"] or item["name"], f"""
-    <section class="frame gallery-main">
+    <section class="frame gallery-main" data-series="{escape(slug, quote=True)}">
       <a class="breadcrumb mono" href="../../#photography">首页 / 摄影集</a>
       <div class="collection-head">
         <div>{title}<h1>{escape(item["name"])}</h1></div>
-        <div class="collection-note">{note}<span class="mono">{total} 张作品</span></div>
+        <div class="collection-note"><span class="mono">{total} 张作品</span></div>
       </div>
       <div class="gallery-grid">{"".join(rows)}
       </div>
@@ -461,7 +462,7 @@ def collection(item, next_item):
       <div class="lightbox-bar"><span class="mono lightbox-count" aria-live="polite"></span><span class="lightbox-note" id="lightbox-note" hidden>向下滚动看完整长图</span><button type="button" class="lightbox-close" aria-label="关闭照片">×</button></div>
       <div class="lightbox-body"><img alt=""></div>
       <div class="lightbox-nav"><button type="button" data-step="-1">上一张</button><button type="button" data-step="1">下一张</button></div>
-    </dialog>""", base, current="photography", gallery=True)
+    </dialog>""", base, current="photography", gallery=True, editorial=True)
 
 
 def filmcam_photos(base):

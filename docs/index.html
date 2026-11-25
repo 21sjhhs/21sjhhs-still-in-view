@@ -4,17 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="摄影作品集与独立产品。">
-  <meta name="theme-color" content="#efeee9">
+  <meta name="theme-color" content="#ffffff">
   <title>Still in View | 摄影与独立创作</title>
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/site.css?v=a5cce12d844e">
-  <link rel="stylesheet" href="assets/projects/projects.css?v=fdaa09f19b34">
+  <link rel="stylesheet" href="assets/site.css?v=895fd923c336">
+  <link rel="stylesheet" href="assets/home.css?v=7cae0b9584a9">
+  <script defer src="assets/editorial.js?v=247dd0239098"></script>
 </head>
-<body>
+<body class="home-page">
   <a class="skip" href="#main">跳至正文</a>
   <header class="site-header">
     <div class="header-inner frame">
-      <a class="brand" href="./" aria-label="Still in View 首页"><span class="mark" aria-hidden="true"></span><span>STILL<br>IN VIEW.</span></a>
+      <a class="brand" href="index.html" aria-label="Still in View 首页" lang="en">Still in View<span aria-hidden="true">.</span></a>
       <nav aria-label="板块导航">
         <a href="#photography"><strong>摄影集</strong><span lang="en">Photography</span></a>
         <a href="#projects"><strong>产品集</strong><span lang="en">Projects</span></a>
@@ -23,123 +24,101 @@
   </header>
   <main id="main">
 
-    <section id="photography" class="home-photography" aria-labelledby="hero-title">
-      <div class="hero frame">
-        <div class="hero-copy">
-          <p class="hero-kicker mono"><span></span> 摄影集</p>
-          <h1 id="hero-title" lang="en"><span>Still in</span><span>View<i>.</i></span></h1>
-          <div class="hero-line"><span>5 个系列 · 98 张作品</span><div class="optical-mark" aria-hidden="true"></div></div>
-        </div>
-        <a class="hero-photo" href="photography/street-documentary/">
-          <div class="hero-image"><img src="assets/photos/street-documentary/01-cover-1920.webp" srcset="assets/photos/street-documentary/01-cover-720.webp 720w, assets/photos/street-documentary/01-cover-1920.webp 1920w" sizes="(max-width: 780px) 92vw, 54vw" width="2429" height="1599" loading="eager" fetchpriority="high" decoding="async" alt="夜色中一位穿浅色衣服的人经过街边"></div>
-          <div class="hero-caption">
-            <div><h2>街头纪实</h2><span class="mono hero-credit" lang="en">Street Documentary</span></div>
-            <span class="mono series-count">11 张 <span class="link-mark" aria-hidden="true"></span></span>
-          </div>
-        </a>
+    <section id="photography" class="archive frame" aria-labelledby="photography-title">
+      <h1 class="archive-wordmark" lang="en">Still in <span>View.</span></h1>
+      <div class="archive-feature">
+        <h2 id="photography-title">摄影集</h2>
+
+        <article class="archive-card">
+          <a href="photography/street-documentary/index.html">
+            <div class="archive-print"><img src="assets/photos/street-documentary/01-cover-1920.webp" srcset="assets/photos/street-documentary/01-cover-720.webp 720w, assets/photos/street-documentary/01-cover-1920.webp 1920w" sizes="(max-width: 640px) 90vw, 45vw" width="2429" height="1599" loading="eager" fetchpriority="high" decoding="async" alt="夜色中一位穿浅色衣服的人经过街边"></div>
+            <h3>街头纪实</h3>
+          </a>
+        </article>
       </div>
-      <div class="series-grid frame">
-    <article class="series-card">
-      <a href="photography/places-we-inhabit/">
-        <div class="series-image"><img src="assets/photos/places-we-inhabit/01-cover-1920.webp" srcset="assets/photos/places-we-inhabit/01-cover-720.webp 720w, assets/photos/places-we-inhabit/01-cover-1920.webp 1920w" sizes="(max-width: 560px) 90vw, (max-width: 900px) 45vw, 56vw" width="2455" height="1600" loading="lazy" decoding="async" alt="一个人从水泥平台跃向江边"></div>
-        <div class="series-caption"><div><h2>栖身之所</h2><div class="mono" lang="en">Places We Inhabit</div></div>
-          <span class="mono series-count">12 张 <span class="link-mark" aria-hidden="true"></span></span>
-        </div>
-      </a>
-    </article>
-    <article class="series-card">
-      <a href="photography/ordinary-places/">
-        <div class="series-image"><img src="assets/photos/ordinary-places/01-cover-1920.webp" srcset="assets/photos/ordinary-places/01-cover-720.webp 720w, assets/photos/ordinary-places/01-cover-1920.webp 1586w" sizes="(max-width: 560px) 90vw, (max-width: 900px) 45vw, 56vw" width="1586" height="1124" loading="lazy" decoding="async" alt="两尾鱼游过水面折射出的光"></div>
-        <div class="series-caption"><div><h2>寻常之地</h2><div class="mono" lang="en">Ordinary Places</div></div>
-          <span class="mono series-count">35 张 <span class="link-mark" aria-hidden="true"></span></span>
-        </div>
-      </a>
-    </article>
-    <article class="series-card series-portrait">
-      <a href="photography/landscapes-and-travel/">
-        <div class="series-image"><img src="assets/photos/landscapes-and-travel/01-cover-1920.webp" srcset="assets/photos/landscapes-and-travel/01-cover-720.webp 477w, assets/photos/landscapes-and-travel/01-cover-1920.webp 1272w" sizes="(max-width: 560px) 90vw, (max-width: 900px) 45vw, 56vw" width="3264" height="4928" loading="lazy" decoding="async" alt="暮色中被树影框住的城市天际线"></div>
-        <div class="series-caption"><div><h2>风光旅拍</h2><div class="mono" lang="en">Landscapes &amp; Travel</div></div>
-          <span class="mono series-count">19 张 <span class="link-mark" aria-hidden="true"></span></span>
-        </div>
-      </a>
-    </article>
-    <article class="series-card series-portrait">
-      <a href="photography/portraits/">
-        <div class="series-image"><img src="assets/photos/portraits/01-cover-1920.webp" srcset="assets/photos/portraits/01-cover-720.webp 515w, assets/photos/portraits/01-cover-1920.webp 1374w" sizes="(max-width: 560px) 90vw, (max-width: 900px) 45vw, 56vw" width="1599" height="2235" loading="lazy" decoding="async" alt="戴红围巾的人举着橙红色气球"></div>
-        <div class="series-caption"><div><h2>人像写真</h2><div class="mono" lang="en">Portraits</div></div>
-          <span class="mono series-count">21 张 <span class="link-mark" aria-hidden="true"></span></span>
-        </div>
-      </a>
-    </article></div>
+      <div class="archive-symbol focus-study" aria-hidden="true"></div>
+      <div class="archive-grid">
+        <article class="archive-card">
+          <a href="photography/places-we-inhabit/index.html">
+            <div class="archive-print"><img src="assets/photos/places-we-inhabit/01-cover-1920.webp" srcset="assets/photos/places-we-inhabit/01-cover-720.webp 720w, assets/photos/places-we-inhabit/01-cover-1920.webp 1920w" sizes="(max-width: 640px) 90vw, 45vw" width="2455" height="1600" loading="lazy" decoding="async" alt="一个人从水泥平台跃向江边"></div>
+            <h3>栖身之所</h3>
+          </a>
+        </article>
+        <article class="archive-card">
+          <a href="photography/ordinary-places/index.html">
+            <div class="archive-print"><img src="assets/photos/ordinary-places/01-cover-1920.webp" srcset="assets/photos/ordinary-places/01-cover-720.webp 720w, assets/photos/ordinary-places/01-cover-1920.webp 1586w" sizes="(max-width: 640px) 90vw, 45vw" width="1586" height="1124" loading="lazy" decoding="async" alt="两尾鱼游过水面折射出的光"></div>
+            <h3>寻常之地</h3>
+          </a>
+        </article>
+        <article class="archive-card archive-card-portrait">
+          <a href="photography/landscapes-and-travel/index.html">
+            <div class="archive-print"><img src="assets/photos/landscapes-and-travel/01-cover-1920.webp" srcset="assets/photos/landscapes-and-travel/01-cover-720.webp 477w, assets/photos/landscapes-and-travel/01-cover-1920.webp 1272w" sizes="(max-width: 640px) 72vw, 32vw" width="3264" height="4928" loading="lazy" decoding="async" alt="暮色中被树影框住的城市天际线"></div>
+            <h3>风光旅拍</h3>
+          </a>
+        </article>
+        <article class="archive-card archive-card-portrait">
+          <a href="photography/portraits/index.html">
+            <div class="archive-print"><img src="assets/photos/portraits/01-cover-1920.webp" srcset="assets/photos/portraits/01-cover-720.webp 515w, assets/photos/portraits/01-cover-1920.webp 1374w" sizes="(max-width: 640px) 72vw, 32vw" width="1599" height="2235" loading="lazy" decoding="async" alt="戴红围巾的人举着橙红色气球"></div>
+            <h3>人像写真</h3>
+          </a>
+        </article>
+      </div>
     </section>
 
-    <div class="projects-transition frame">
-      <a class="projects-jump" href="#projects">
-        <div><small class="mono" lang="en">SCROLL FOR PROJECTS</small><strong>往下看产品集</strong></div>
-        <span class="projects-jump-arrow" aria-hidden="true">↓</span>
-      </a>
-    </div>
-
-    <section id="projects" class="section frame" aria-labelledby="projects-title">
-      <div class="section-head">
-        <div><p class="mono section-label">产品集</p><h2 id="projects-title" lang="en">Built by hand<i>.</i></h2></div>
-        <span class="mono section-side">4 个项目</span>
+    <section id="projects" class="home-projects frame" aria-labelledby="projects-title">
+      <div class="project-index-head">
+        <h2 id="projects-title">产品集</h2>
+        <div class="archive-symbol assembly-study" aria-hidden="true"></div>
       </div>
+      <p class="file-preview-note" hidden><a class="text-link" href="http://127.0.0.1:8766/#projects">打开本地交互预览</a></p>
       <div class="project-list">
-      <article class="project-theme-filmcam">
-        <a class="project-feature" href="projects/filmcam/">
-          <div class="project-copy">
-            <span class="mono project-kicker">Android App / 0.5.0</span>
-            <h3 lang="en">FilmCam</h3>
-            <p>为街头快拍设计。快门外圈调曝光，胶片色彩实时取景。</p>
-            <span class="project-link">查看产品 <span class="link-mark" aria-hidden="true"></span></span>
-          </div>
-          <div class="camera-art" aria-hidden="true">
-      <div class="viewfinder"><img src="assets/photos/ordinary-places/28-wechatimg2099-1920.webp" srcset="assets/photos/ordinary-places/28-wechatimg2099-720.webp 720w, assets/photos/ordinary-places/28-wechatimg2099-1920.webp 1920w" sizes="(max-width: 680px) 73vw, 48vw" width="2327" height="1599" loading="lazy" decoding="async" alt="">
-        <div class="v-grid"></div><span class="v-target"></span>
-        <div class="v-data mono"><span>FILMCAM</span><span>+0.3 EV</span></div>
-        <div class="v-control mono"><span>青岚 200</span><span class="v-shutter"></span><span>1.0×</span></div>
-      </div>
-      <span class="view-label mono">取景示意</span>
-    </div>
-        </a>
+      <article class="project-entry project-theme-filmcam" data-reveal>
+        <div class="project-copy">
+          <span class="mono project-kicker">Android App / 0.5.0</span>
+          <h3 lang="en"><a href="projects/filmcam/index.html">FilmCam</a></h3>
+          <p>为街头快拍设计。快门外圈调曝光，胶片色彩实时取景。</p>
+          <a class="project-link" href="projects/filmcam/index.html">查看产品</a>
+        </div>
+        <div class="project-display">
+          <iframe class="project-preview" data-preview-src="projects/filmcam/index.html?portfolio" hidden title="FilmCam 交互演示" loading="lazy" data-fit=".device-demo"></iframe>
+        </div>
       </article>
-      <article class="project-theme-noemorph">
-        <a class="project-feature project-brief" href="projects/noemorph/">
-          <div class="project-copy">
-            <span class="mono project-kicker">AI Research Skill</span>
-            <h3 lang="en">Noemorph</h3>
-            <p>把一个研究问题拓展成可追溯的研究路径。</p>
-            <span class="project-link">查看产品 <span class="link-mark" aria-hidden="true"></span></span>
-          </div>
-          <div class="project-art"><img src="assets/projects/noemorph-map.webp" width="1440" height="960" alt="" decoding="async" loading="lazy"></div>
-        </a>
+      <article class="project-entry project-theme-noemorph" data-reveal>
+        <div class="project-copy">
+          <span class="mono project-kicker">AI Research Skill</span>
+          <h3 lang="en"><a href="projects/noemorph/index.html">Noemorph</a></h3>
+          <p>把一个研究问题拓展成可追溯的研究路径。</p>
+          <a class="project-link" href="projects/noemorph/index.html">查看产品</a>
+        </div>
+        <div class="project-display">
+          <iframe class="project-preview" src="projects/noemorph/knowledge-map.html?portfolio" title="Noemorph 交互演示" loading="lazy"></iframe>
+        </div>
       </article>
-      <article class="project-theme-waterwidget">
-        <a class="project-feature project-brief" href="projects/waterwidget/">
-          <div class="project-copy">
-            <span class="mono project-kicker">macOS 桌面小组件</span>
-            <h3 lang="en">WaterWidget</h3>
-            <p>从杯中的液面读出喝水量，随手记在桌面上。</p>
-            <span class="project-link">查看产品 <span class="link-mark" aria-hidden="true"></span></span>
-          </div>
-          <div class="project-art"><img src="assets/projects/waterwidget.webp" width="1120" height="800" alt="" decoding="async" loading="lazy"></div>
-        </a>
+      <article class="project-entry project-theme-waterwidget" data-reveal>
+        <div class="project-copy">
+          <span class="mono project-kicker">macOS 桌面小组件</span>
+          <h3 lang="en"><a href="projects/waterwidget/index.html">WaterWidget</a></h3>
+          <p>从杯中的液面读出喝水量，随手记在桌面上。</p>
+          <a class="project-link" href="projects/waterwidget/index.html">查看产品</a>
+        </div>
+        <div class="project-display">
+          <iframe class="project-preview" data-preview-src="projects/waterwidget/demo/index.html?portfolio" hidden title="WaterWidget 交互演示" loading="lazy" data-fit=".desktop-space"></iframe>
+        </div>
       </article>
-      <article class="project-theme-code-reading-with-deepseek">
-        <a class="project-feature project-brief" href="projects/code-reading-with-deepseek/">
-          <div class="project-copy">
-            <span class="mono project-kicker">本地阅读工具 · DeepSeek</span>
-            <h3>逐行解释</h3>
-            <p>左边读原文，右边看对应的解释或翻译。</p>
-            <span class="project-link">查看产品 <span class="link-mark" aria-hidden="true"></span></span>
-          </div>
-          <div class="project-art"><img src="assets/projects/line-reading.webp" width="1120" height="640" alt="" decoding="async" loading="lazy"></div>
-        </a>
+      <article class="project-entry project-theme-code-reading-with-deepseek" data-reveal>
+        <div class="project-copy">
+          <span class="mono project-kicker">本地阅读工具 · DeepSeek</span>
+          <h3><a href="projects/code-reading-with-deepseek/index.html">逐行解释</a></h3>
+          <p>左边读原文，右边看对应的解释或翻译。</p>
+          <a class="project-link" href="projects/code-reading-with-deepseek/index.html">查看产品</a>
+        </div>
+        <div class="project-display">
+          <iframe class="project-preview" data-preview-src="projects/code-reading-with-deepseek/demo/index.html?portfolio" hidden title="逐行解释 交互演示" loading="lazy"></iframe>
+        </div>
       </article>
       </div>
     </section>
   </main>
-  <footer class="site-footer frame"><a href="./" lang="en">STILL IN VIEW.</a><span>摄影与独立创作</span><a href="#main">回到顶部</a></footer>
+  <footer class="site-footer frame"><a href="index.html" lang="en">STILL IN VIEW.</a><span>摄影与独立创作</span><a href="#main">回到顶部</a></footer>
 </body>
 </html>
